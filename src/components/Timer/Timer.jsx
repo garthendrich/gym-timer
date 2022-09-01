@@ -17,14 +17,8 @@ export function Timer({ minutes = 0, seconds = 0 }) {
     restart,
   } = useTimer({
     expiryTimestamp,
+    autoStart: false,
   });
-
-  useEffect(() => pause(), []);
-
-  function handleRestart() {
-    restart(expiryTimestamp);
-    pause();
-  }
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -38,7 +32,10 @@ export function Timer({ minutes = 0, seconds = 0 }) {
         </span>
       </div>
       <div className="flex gap-4">
-        <button onClick={handleRestart} className="w-16">
+        <button
+          onClick={() => restart(expiryTimestamp, false)}
+          className="w-16"
+        >
           <ArrowPathIcon />
         </button>
         {isRunning ? (
