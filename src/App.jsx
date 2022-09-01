@@ -25,10 +25,10 @@ function App() {
         <Timer minutes={selectedMinutes} seconds={selectedSeconds} />
       </div>
       <div className="flex flex-col gap-3 w-full bg-red p-4">
-        {timerOptions.map((options) => (
+        {timerOptions.map((options, key) => (
           <TimerOption
             {...options}
-            {...{ setSelectedMinutes, setSelectedSeconds }}
+            {...{ key, setSelectedMinutes, setSelectedSeconds }}
           />
         ))}
       </div>
