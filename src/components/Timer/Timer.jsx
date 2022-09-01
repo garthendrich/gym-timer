@@ -3,11 +3,6 @@ import { useTimer } from "react-timer-hook";
 import { ArrowPathIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 
 export function Timer({ minutes = 0, seconds = 0 }) {
-  const totalSeconds = minutes * 60 + seconds;
-
-  const expiryTimestamp = new Date();
-  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + totalSeconds);
-
   const {
     minutes: currentMinutes,
     seconds: currentSeconds,
@@ -16,9 +11,18 @@ export function Timer({ minutes = 0, seconds = 0 }) {
     pause,
     restart,
   } = useTimer({
-    expiryTimestamp,
+    expiryTimestamp: new Date(),
     autoStart: false,
   });
+
+  useEffect(() => {
+    const totalSeconds = minutes * 60 + seconds;
+
+    const expiryTimestamp = new Date();
+    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + totalSeconds);
+
+    restart(expiryTimestamp, false);
+  }, [minutes, seconds]);
 
   return (
     <div className="flex flex-col items-center gap-8">
