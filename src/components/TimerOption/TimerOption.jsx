@@ -11,14 +11,14 @@ export function TimerOption({
   }
 
   return (
-    <div
-      className="border rounded p-4 border-slate-500 w-full"
+    <button
+      className="border rounded p-4 border-slate-500 w-full text-left"
       onClick={handleClick}
     >
       {label && <p className="text-base">{label}</p>}
       <span className="text-3xl">{minutes.toString().padStart(2, "0")}</span>
       <span className="text-3xl">:</span>
       <span className="text-3xl">{seconds.toString().padStart(2, "0")}</span>
-    </div>
+    </button>
   );
 }
